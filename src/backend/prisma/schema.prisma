@@ -1,0 +1,24 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Status {
+  active
+  nonactive
+}
+
+model Folder {
+  id        Int      @id @default(autoincrement())
+  name      String
+  parent    Folder?  @relation("ParentChild", fields: [parentId], references: [id])
+  parentId  Int?
+  children  Folder[] @relation("ParentChild")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  status    Status   @default(active)
+}
