@@ -1,0 +1,18 @@
+{
+  "name": "file-explorer",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "concurrently": "^9.1.2"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "start": "concurrently \"bun run --cwd src/backend dev\" \"bun run --cwd src/frontend vite\"",
+    "dev": "vite",
+    "reset": "bun run --cwd src/backend stop && bun run --cwd src/frontend stop",
+    "start:reset": "npm run reset && npm run start"
+  }
+}
